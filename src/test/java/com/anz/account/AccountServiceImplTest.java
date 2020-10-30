@@ -43,18 +43,18 @@ public class AccountServiceImplTest {
 
     @Test
     public void getAccountDetails_NoAccountDetailsFound() {
-        Mockito.when(repository.findById(1234)).thenThrow(new NoDataFoundException("Account Details Not Available"));
+        Mockito.when(repository.findById(1234L)).thenThrow(new NoDataFoundException("Account Details Not Available"));
         Throwable throwable = catchThrowable(
-                () -> accountService.getAccountDetails(1234));
+                () -> accountService.getAccountDetails(1234L));
         assertThat(throwable).isInstanceOf(NoDataFoundException.class);
     }
 
     @Test
     public void getAccountTransaction_NoAccountDetailsFound() {
 
-        Mockito.when(repository.findById(98767878)).thenReturn(Optional.of(new Account()));
+        Mockito.when(repository.findById(98767878L)).thenReturn(Optional.of(new Account()));
         Throwable throwable = catchThrowable(
-                () -> accountService.getAccountTransaction(98767878));
+                () -> accountService.getAccountTransaction(98767878L));
         assertThat(throwable).isInstanceOf(NoDataFoundException.class);
     }
 
@@ -70,13 +70,13 @@ public class AccountServiceImplTest {
     public void getAccountDetails_withAllFields() {
         Account account = new Account();
         account.setAccountName("James");
-        account.setAccountNumber(585309209);
+        account.setAccountNumber(585309209L);
         account.setAccountType("Saving");
         account.setBalanceDate(new Date());
         account.setCurrency("INR");
-        Mockito.when(repository.findById(585309209)).thenReturn(Optional.of(account));
+        Mockito.when(repository.findById(585309209L)).thenReturn(Optional.of(account));
 
-        AccountResponse response = accountService.getAccountDetails(585309209);
+        AccountResponse response = accountService.getAccountDetails(585309209L);
         Assertions.assertEquals(585309209, response.getAccountNumber());
         Assertions.assertEquals("James", response.getAccountName());
         Assertions.assertEquals("Saving", response.getAccountType());
@@ -88,19 +88,19 @@ public class AccountServiceImplTest {
     public void getTransactionDetails_withAllFields() {
         Account account = new Account();
         account.setAccountName("James");
-        account.setAccountNumber(585309209);
+        account.setAccountNumber(585309209L);
         account.setAccountType("Saving");
         account.setBalanceDate(new Date());
         Transaction transaction = new Transaction();
-        transaction.setTransactionId(12345678);
+        transaction.setTransactionId(12345678L);
         transaction.setDebitOrCredit("credit");
         transaction.setAccount(account);
         transaction.setCurrency("INR");
         Set set = new HashSet<Transaction>();
         set.add(transaction);
         account.setTransaction(set);
-        Mockito.when(repository.findById(585309209)).thenReturn(Optional.of(account));
-        Set<TransactionResponse> response = accountService.getAccountTransaction(585309209);
+        Mockito.when(repository.findById(585309209L)).thenReturn(Optional.of(account));
+        Set<TransactionResponse> response = accountService.getAccountTransaction(585309209L);
         for (TransactionResponse rs : response) {
             Assertions.assertEquals("INR", rs.getCurrency());
             Assertions.assertEquals(12345678, rs.getTransactionId());

@@ -1,33 +1,38 @@
 package com.anz.account.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-@Table(name = "transactionDetails")
-@Entity
-@Data
-public class Transaction {
-    @Id
-    @Column
-    private Integer transactionId;
 
-    @Column
+@Entity
+@Table(name = "TBL_TRANSACTION")
+@Setter
+@Getter
+public class Transaction implements Serializable {
+    @Id
+    @Column(name = "transaction_id")
+    private Long transactionId;
+
+    @Column(name = "currency")
     private String currency;
 
-    @Column
+    @Column(name = "amount")
     private Double amount;
 
-    @Column
+    @Column(name = "debit_or_credit")
     private String debitOrCredit;
 
-    @Column
+    @Column(name = "value_date")
     private Date valueDate;
 
-    @Column
+    @Column(name = "transaction_narrative")
     private String transactionNarrative;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false, name = "account_number")
     private Account account;
 }

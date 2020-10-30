@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,7 +24,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDetailsRepository repository;
 
-    public AccountResponse getAccountDetails(Integer id) {
+    public AccountResponse getAccountDetails(Long id) {
         validateAccountId(id);
         Optional<Account> isData = repository.findById(id);
         if (isData.isPresent()) {
@@ -35,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-    public Set<TransactionResponse> getAccountTransaction(Integer id) {
+    public Set<TransactionResponse> getAccountTransaction(Long id) {
         validateAccountId(id);
         Optional<Account> isData = repository.findById(id);
         if (isData.isPresent()) {
@@ -55,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-    private void validateAccountId(Integer id) {
+    private void validateAccountId(Long id) {
         if (id == null) {
             throw new InvalidAccountException("Invalid Account Number");
         }

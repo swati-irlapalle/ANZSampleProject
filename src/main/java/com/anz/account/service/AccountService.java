@@ -7,6 +7,7 @@ import java.util.Set;
 
 public interface AccountService {
 
-     AccountResponse getAccountDetails(Integer id);
-     Set<TransactionResponse> getAccountTransaction(Integer id);
+    AccountResponse getAccountDetails(Long id);
+
+    Set<TransactionResponse> getAccountTransaction(Long id);
 }

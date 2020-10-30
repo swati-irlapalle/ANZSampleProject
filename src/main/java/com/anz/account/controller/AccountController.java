@@ -20,12 +20,12 @@ public class AccountController {
     private AccountServiceImpl service;
 
     @GetMapping(value = "/view/account/{id}")
-    public ResponseEntity<AccountResponse> getAccountDetails(@NotNull @PathVariable("id") Integer id) {
+    public ResponseEntity<AccountResponse> getAccountDetails(@NotNull @PathVariable("id") Long id) {
         return ResponseEntity.ok().body(service.getAccountDetails(id));
     }
 
     @GetMapping(value = "/view/transaction/{id}")
-    public ResponseEntity<Set<TransactionResponse>> getAccountTransaction(@PathVariable("id") Integer id) {
+    public ResponseEntity<Set<TransactionResponse>> getAccountTransaction(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(service.getAccountTransaction(id));
 
     }

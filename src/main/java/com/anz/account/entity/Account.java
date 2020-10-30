@@ -1,36 +1,39 @@
 package com.anz.account.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-@Table(name = "accountDetails")
+
 @Entity
-@Data
-public class Account {
+@Table(name = "TBL_ACCOUNT")
+@Setter
+@Getter
+public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer accountNumber;
+    @Column(name = "account_number")
+    private Long accountNumber;
 
-    @Column
+    @Column(name = "account_name")
     private String accountName;
 
-    @Column
+    @Column(name = "account_type")
     private String accountType;
 
-    @Column
+    @Column(name = "balance_date")
     private Date balanceDate;
 
-    @Column
+    @Column(name = "currency")
     private String currency;
 
-    @Column
+    @Column(name = "opening_available_balance")
     private Double openingAvailableBalance;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="account_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private Set<Transaction> transaction;
 }

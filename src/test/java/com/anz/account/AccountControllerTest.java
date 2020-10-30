@@ -29,16 +29,16 @@ public class AccountControllerTest {
     @Test
     public void getAccountDetails() {
         AccountResponse expected = Mockito.mock(AccountResponse.class);
-        Mockito.when(service.getAccountDetails(585309209)).thenReturn(expected);
-        ResponseEntity<AccountResponse> actual = controller.getAccountDetails(585309209);
+        Mockito.when(service.getAccountDetails(585309209L)).thenReturn(expected);
+        ResponseEntity<AccountResponse> actual = controller.getAccountDetails(585309209L);
         assertThat(actual.getBody()).isEqualTo(expected);
     }
 
     @Test
     public void getAccountTransaction() {
         Set<TransactionResponse> expected = new HashSet<TransactionResponse>();
-        Mockito.when(service.getAccountTransaction(585309209)).thenReturn(expected);
-        ResponseEntity<Set<TransactionResponse>> actual = controller.getAccountTransaction(585309209);
+        Mockito.when(service.getAccountTransaction(585309209L)).thenReturn(expected);
+        ResponseEntity<Set<TransactionResponse>> actual = controller.getAccountTransaction(585309209L);
         assertThat(actual.getBody()).isEqualTo(expected);
     }
 }
