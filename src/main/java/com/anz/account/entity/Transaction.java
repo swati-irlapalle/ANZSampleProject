@@ -32,7 +32,7 @@ public class Transaction implements Serializable {
     @Column(name = "transaction_narrative")
     private String transactionNarrative;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "account_number")
     private Account account;
 }

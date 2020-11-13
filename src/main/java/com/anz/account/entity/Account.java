@@ -15,7 +15,7 @@ import java.util.Set;
 @Getter
 public class Account implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_number")
     private Long accountNumber;
 
@@ -34,6 +34,6 @@ public class Account implements Serializable {
     @Column(name = "opening_available_balance")
     private Double openingAvailableBalance;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account",fetch = FetchType.EAGER)
     private Set<Transaction> transaction;
 }

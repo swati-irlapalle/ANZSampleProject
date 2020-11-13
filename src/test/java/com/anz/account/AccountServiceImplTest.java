@@ -81,7 +81,6 @@ public class AccountServiceImplTest {
         Assertions.assertEquals("James", response.getAccountName());
         Assertions.assertEquals("Saving", response.getAccountType());
         Assertions.assertEquals("INR", response.getCurrency());
-        Assertions.assertEquals(null, response.getTransaction());
     }
 
     @Test
