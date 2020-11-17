@@ -7,7 +7,6 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -28,7 +27,7 @@ public class WebClient {
             }
     )
     public AccountResponse   getCall() throws NoDataFoundException {
-        String message = restTemplate.getForObject("http://localhost:9090/employees/" + "hello", String.class);
+        String message = restTemplate.getForObject("http://localhost:9070/externalservice/" + "hello", String.class);
         System.out.println(message);
         return new AccountResponse();
     }

@@ -10,15 +10,9 @@ import com.anz.account.repository.AccountDetailsRepository;
 import com.anz.account.response.AccountResponse;
 import com.anz.account.response.TransactionResponse;
 import com.anz.account.service.AccountService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.sun.istack.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -34,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private WebClient client;
 
-    public AccountResponse getAccountDetails(Long id) throws NoDataFoundException{
+    public AccountResponse getAccountDetails(Long id) throws NoDataFoundException {
         log.trace("AccountServiceImpl.getAccountDetails-entry");
         client.getCall();
         validateAccountId(id);
@@ -46,7 +40,6 @@ public class AccountServiceImpl implements AccountService {
             throw new NoDataFoundException("Account Details Not Available");
         }
     }
-
 
 
     public Set<TransactionResponse> getAccountTransaction(Long id) {
